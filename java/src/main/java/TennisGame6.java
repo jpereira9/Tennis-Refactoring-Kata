@@ -18,7 +18,7 @@ public class TennisGame6 implements TennisGame {
 
     }
 
-    public String getScore()
+    public StringBuilder getScore()
     {
         String result;
 
@@ -87,6 +87,6 @@ public class TennisGame6 implements TennisGame {
             result = regularScore;
         }
 
-        return result;
+        return new StringBuilder(result);
     }
 }

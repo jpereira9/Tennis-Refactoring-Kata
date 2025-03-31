@@ -11,17 +11,17 @@ public class TennisGame3 implements TennisGame {
         this.p2N = p2N;
     }
 
-    public String getScore() {
+    public StringBuilder getScore() {
         String s;
         if (p1 < 4 && p2 < 4 && !(p1 + p2 == 6)) {
             String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"}; 
             s = p[p1];
-            return (p1 == p2) ? s + "-All" : s + "-" + p[p2];
+            return new StringBuilder((p1 == p2) ? s + "-All" : s + "-" + p[p2]);
         } else {
             if (p1 == p2)
-                return "Deuce";
+                return new StringBuilder("Deuce");
             s = p1 > p2 ? p1N : p2N;
-            return ((p1-p2)*(p1-p2) == 1) ? "Advantage " + s : "Win for " + s;
+            return new StringBuilder(((p1 - p2) * (p1 - p2) == 1) ? "Advantage " + s : "Win for " + s);
         }
     }
     

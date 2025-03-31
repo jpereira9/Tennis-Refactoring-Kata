@@ -24,7 +24,7 @@ public class TennisGame5 implements TennisGame {
     }
 
     @Override
-    public String getScore() {
+    public StringBuilder getScore() {
         int p1 = player1Score;
         int p2 = player2Score;
 
@@ -62,7 +62,7 @@ public class TennisGame5 implements TennisGame {
 
         var entry = Map.entry(p1, p2);
         if (lookup.containsKey(entry)) {
-            return lookup.get(entry);
+            return new StringBuilder(lookup.get(entry));
         } else {
             throw new IllegalArgumentException("Invalid score.");
         }

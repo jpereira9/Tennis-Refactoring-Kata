@@ -60,13 +60,13 @@ public class TennisTest {
                 game.wonPoint("player2");
             }
         }
-        assertEquals(expectedScore, game.getScore());
+        assertEquals(expectedScore, game.getScore().toString());
     }
 
     @ParameterizedTest
     @MethodSource("getAllScores")
     public void checkAllScoresTennisGame1(int player1Points, int player2Points, String expectedScore) {
-        TennisGame game = new TennisGame1("player1", "player2");
+        TennisGame game = new TennisGame1();
         checkAllScores(player1Points, player2Points, expectedScore, game);
     }
 

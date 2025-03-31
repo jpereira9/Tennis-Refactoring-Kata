@@ -2,40 +2,40 @@ import java.util.Objects;
 
 public class TennisGame1 implements TennisGame {
     
-    private int player1Score = 0;
-    private int player2Score = 0;
+    private int player1Points = 0;
+    private int player2Points = 0;
 
-    public TennisGame1(String player1Name, String player2Name) {
+    public TennisGame1() {
     }
 
     public void wonPoint(String playerName) {
         if (Objects.equals(playerName, "player1")) {
-            player1Score += 1;
+            player1Points += 1;
         } else
-            player2Score += 1;
+            player2Points += 1;
     }
 
-    public String getScore() {
+    public StringBuilder getScore() {
         StringBuilder score = new StringBuilder();
-        if (player1Score == player2Score) {
+        if (player1Points == player2Points) {
             score = getScoreIfEqualPoints();
-        } else if (player1Score >= 4 || player2Score >= 4) {
+        } else if (player1Points >= 4 || player2Points >= 4) {
             score = getScoreIfFourPoints();
         } else {
             getScoreIfDifferenceInPoints(score);
         }
-        return score.toString();
+        return new StringBuilder(score.toString());
     }
 
     private void getScoreIfDifferenceInPoints(StringBuilder score) {
         int tempScore;
         for (int i = 1; i < 3; i++) {
             if (i == 1) {
-                tempScore = player1Score;
+                tempScore = player1Points;
             }
             else {
                 score.append("-");
-                tempScore = player2Score;
+                tempScore = player2Points;
             }
             switch (tempScore) {
                 case 0 -> score.append("Love");
@@ -48,17 +48,22 @@ public class TennisGame1 implements TennisGame {
 
     private StringBuilder getScoreIfFourPoints() {
         StringBuilder score;
-        int player1ScoreMinusPlayer2Score = player1Score - player2Score;
-        if (player1ScoreMinusPlayer2Score == 1) score = new StringBuilder("Advantage player1");
-        else if (player1ScoreMinusPlayer2Score == -1) score = new StringBuilder("Advantage player2");
-        else if (player1ScoreMinusPlayer2Score>= 2) score = new StringBuilder("Win for player1");
-        else score = new StringBuilder("Win for player2");
+        int player1PointsMinusPlayer2Points = player1Points - player2Points;
+        if (player1PointsMinusPlayer2Points == 1) {
+            score = new StringBuilder("Advantage player1");
+        } else if (player1PointsMinusPlayer2Points == -1) {
+            score = new StringBuilder("Advantage player2");
+        } else if (player1PointsMinusPlayer2Points>= 2) {
+            score = new StringBuilder("Win for player1");
+        } else {
+            score = new StringBuilder("Win for player2");
+        }
         return score;
     }
 
     private StringBuilder getScoreIfEqualPoints() {
         StringBuilder score;
-        score = new StringBuilder(switch (player1Score) {
+        score = new StringBuilder(switch (player1Points) {
             case 0 -> "Love-All";
             case 1 -> "Fifteen-All";
             case 2 -> "Thirty-All";

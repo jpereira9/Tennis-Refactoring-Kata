@@ -18,7 +18,7 @@ public class TennisGame7 implements TennisGame {
 
     }
 
-    public String getScore()
+    public StringBuilder getScore()
     {
         String result = "Current score: ";
 
@@ -75,6 +75,6 @@ public class TennisGame7 implements TennisGame {
 
         }
 
-        return result + ", enjoy your game!";
+        return new StringBuilder(result + ", enjoy your game!");
     }
 }
