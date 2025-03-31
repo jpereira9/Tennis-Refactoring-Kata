@@ -53,10 +53,12 @@ public class TennisTest {
     private static void checkAllScores(int player1Points, int player2Points, String expectedScore, TennisGame game) {
         int highestScore = Math.max(player1Points, player2Points);
         for (int i = 0; i < highestScore; i++) {
-            if (i < player1Points)
+            if (i < player1Points) {
                 game.wonPoint("player1");
-            if (i < player2Points)
+            }
+            if (i < player2Points) {
                 game.wonPoint("player2");
+            }
         }
         assertEquals(expectedScore, game.getScore());
     }
