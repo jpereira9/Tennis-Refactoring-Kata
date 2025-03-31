@@ -11,10 +11,12 @@ public class TennisGame7 implements TennisGame {
 
     @Override
     public void wonPoint(String playerName) {
-        if (playerName.equals("player1"))
+        if (playerName.equals("player1")) {
             player1Score++;
-        else
+        }
+        else {
             player2Score++;
+        }
 
     }
 
@@ -22,27 +24,14 @@ public class TennisGame7 implements TennisGame {
     {
         String result = "Current score: ";
 
-        if (player1Score == player2Score)
-        {
+        if (player1Score == player2Score) {
             // tie score
-            switch (player1Score)
-            {
-                case 0:
-                    result += "Love-All";
-                    break;
-                case 1:
-                    result += "Fifteen-All";
-                    break;
-                case 2:
-                    result += "Thirty-All";
-                    break;
-                default:
-                    result += "Deuce";
-                    break;
+            if (player1Score >= 3) {
+                result += "Deuce";
+            } else {
+                result += getPlayerScore(player1Score) + "-All";
             }
-        }
-        else if (player1Score >= 4 || player2Score >= 4)
-        {
+        } else if (player1Score >= 4 || player2Score >= 4) {
             // end-game score
             if (player1Score - player2Score == 1) {
                 result += "Advantage " + player1Name;
@@ -53,28 +42,22 @@ public class TennisGame7 implements TennisGame {
             } else {
                 result += "Win for " + player2Name;
             }
-        }
-        else
-        {
+        } else {
             // regular score
-            result +=  switch (player1Score)
-            {
-                case 0 -> "Love";
-                case 1 -> "Fifteen";
-                case 2 -> "Thirty";
-                default -> "Forty";
-            };
+            result += getPlayerScore(player1Score);
             result += "-";
-            result +=  switch (player2Score)
-            {
-                case 0 -> "Love";
-                case 1 -> "Fifteen";
-                case 2 -> "Thirty";
-                default -> "Forty";
-            };
-
+            result += getPlayerScore(player2Score);
         }
 
         return new StringBuilder(result + ", enjoy your game!");
+    }
+
+    private String getPlayerScore(int playerScore) {
+        return switch (playerScore) {
+            case 0 -> "Love";
+            case 1 -> "Fifteen";
+            case 2 -> "Thirty";
+            default -> "Forty";
+        };
     }
 }

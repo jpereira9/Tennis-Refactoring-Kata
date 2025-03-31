@@ -25,15 +25,26 @@ public class TennisGame5 implements TennisGame {
 
     @Override
     public StringBuilder getScore() {
-        int p1 = player1Score;
-        int p2 = player2Score;
+        int player1Points = player1Score;
+        int player2Points = player2Score;
 
-        while (p1 > 4 || p2 > 4) {
-            p1--;
-            p2--;
+        while (player1Points > 4 || player2Points > 4) {
+            player1Points--;
+            player2Points--;
         }
 
-        var lookup = new HashMap<Map.Entry, String>();
+        Map<Map.Entry<Integer, Integer>, String> scoreMap = new HashMap<>();
+        createScoreMap(scoreMap);
+
+        Map.Entry<Integer, Integer> entry = Map.entry(player1Points, player2Points);
+        if (scoreMap.containsKey(entry)) {
+            return new StringBuilder(scoreMap.get(entry));
+        } else {
+            throw new IllegalArgumentException("Invalid score.");
+        }
+    }
+
+    private static void createScoreMap(Map<Map.Entry<Integer, Integer>, String> lookup) {
         lookup.put(Map.entry(0, 0), "Love-All");
         lookup.put(Map.entry(0, 1), "Love-Fifteen");
         lookup.put(Map.entry(0, 2), "Love-Thirty");
@@ -59,12 +70,5 @@ public class TennisGame5 implements TennisGame {
         lookup.put(Map.entry(4, 2), "Win for player1");
         lookup.put(Map.entry(4, 3), "Advantage player1");
         lookup.put(Map.entry(4, 4), "Deuce");
-
-        var entry = Map.entry(p1, p2);
-        if (lookup.containsKey(entry)) {
-            return new StringBuilder(lookup.get(entry));
-        } else {
-            throw new IllegalArgumentException("Invalid score.");
-        }
     }
 }

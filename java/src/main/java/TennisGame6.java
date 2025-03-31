@@ -18,34 +18,18 @@ public class TennisGame6 implements TennisGame {
 
     }
 
-    public StringBuilder getScore()
-    {
+    public StringBuilder getScore() {
         String result;
 
-        if (player1Score == player2Score)
-        {
+        if (player1Score == player2Score) {
             // tie score
-            String tieScore;
-            switch (player1Score)
-            {
-                case 0:
-                    tieScore = "Love-All";
-                    break;
-                case 1:
-                    tieScore = "Fifteen-All";
-                    break;
-                case 2:
-                    tieScore = "Thirty-All";
-                    break;
-                default:
-                    tieScore = "Deuce";
-                    break;
-            }
-
-            result = tieScore;
-        }
-        else if (player1Score >= 4 || player2Score >= 4)
-        {
+            result = switch (player1Score) {
+                case 0 -> "Love-All";
+                case 1 -> "Fifteen-All";
+                case 2 -> "Thirty-All";
+                default -> "Deuce";
+            };
+        } else if (player1Score >= 4 || player2Score >= 4) {
             // end-game score
             String endGameScore;
 
@@ -60,22 +44,18 @@ public class TennisGame6 implements TennisGame {
             }
 
             result = endGameScore;
-        }
-        else
-        {
+        } else {
             // regular score
             String regularScore;
 
-            String score1 =  switch (player1Score)
-            {
+            String score1 =  switch (player1Score) {
                 case 0 -> "Love";
                 case 1 -> "Fifteen";
                 case 2 -> "Thirty";
                 default -> "Forty";
             };
 
-            var score2 =  switch (player2Score)
-            {
+            String score2 =  switch (player2Score) {
                 case 0 -> "Love";
                 case 1 -> "Fifteen";
                 case 2 -> "Thirty";
